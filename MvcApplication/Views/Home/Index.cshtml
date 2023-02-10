@@ -1,0 +1,94 @@
+﻿@model IEnumerable<MvcApplication.DTO.MvcModule.MvcDTO>
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="~/css/style.css" rel="stylesheet" />
+
+<div class="x_panel " style="height: 5rem; background-color: #136da0;">
+    <div class="col-md-10 my-auto">
+        <h4 class="top-bar-header">
+            Search MVC - Member Verification Code
+        </h4>
+        <p class="text-primary">
+            <span class="barFont">Home</span> <span class="barFont"> <i class="fa fa-angle-double-right"></i> </span>  <span class="barFont">MVC</span>
+        </p>
+    </div>
+</div>
+
+
+<div class="x_panel shadow p-3 mb-5 bg-white rounded">
+    <div class="x_title">
+        <div class="row">
+            <div class="col-md-4">
+                <h6 class="Header"><i class="fa fa-building"></i>List of MVCs</h6>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+
+        <div class="">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="">
+                        <table id="tblListOfMvc" class="table table-striped table-bordered dt-responsive nowrap table-sm" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">MVC No</th>
+                                    <th scope="col">Patient Name</th>
+                                    <th scope="col">Scheme</th>
+                                    <th scope="col">Department</th>
+                                    <th scope="col">MVC Date</th>
+                                    <th scope="col">PreAuth Status</th>
+                                    <th scope="col">Claim Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @if (Model != null && Model.Count() > 0)
+                                {
+                                    int count = 1;
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@count</td>
+                                            <td>@item.MvcNumber</td>
+                                            <td>@item.MemberName</td>
+                                            <td>@item.Scheme</td>
+                                            <td>@item.Department</td>
+                                            <td>@item.MvcDate</td>                                           
+                                            <td>@item.IsPreAuthLocked</td>                                           
+                                            <td>@item.IsClaimLocked</td>                                           
+                                        </tr>
+
+                                        count++;
+                                    }
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="divLoader" style="display:none;" class="loader">
+    <img src="~/loaders/loading-23.gif" alt="Loader" style="width:20em;" />
+
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#tblListOfMvc').DataTable();
+    });
+</script>
+
+

@@ -1,0 +1,194 @@
+﻿@model IEnumerable<MvcApplication.DTO.MvcModule.MemberDTO>
+@{
+    ViewData["Title"] = "Index";
+    //Layout = "~/Areas/Hospital/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/style.css" rel="stylesheet" />
+
+<div class="x_panel " style="height: 5rem; background-color: #136da0;">
+    <div class="col-md-10 my-auto">
+        <h4 class="top-bar-header">
+            Generate MVC - Member Verification Code
+        </h4>
+        <p class="text-primary">
+            <span class="barFont">Home</span> <span class="barFont"> <i class="fa fa-angle-double-right"></i> </span>  <span class="barFont">MVC</span>
+        </p>
+    </div>
+</div>
+
+
+<div class="x_panel shadow">
+    <div id="divErrorGen">
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger" role="alert" id="error">
+                @TempData["Error"].ToString()
+            </div>
+        }
+    </div>
+
+    <div id="divSuccess">
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success" role="alert" id="error">
+                @TempData["Success"].ToString()
+            </div>
+        }
+    </div>
+
+    <div class="">
+        <form class="needs-validation" novalidate id="frmSearchMember">
+            <div class="container">
+                <div class="col-md-3 mb-3">
+                    <label class="validationCustom02">Search Scheme</label>
+                    <select class="form-control myinputs" id="txtSchemeNo" name="Scheme" required>
+                        <option value="" selected="selected" hidden>Select Scheme</option>
+                        @if (ViewBag.Schemes != null)
+                        {
+                            foreach (var item in ViewBag.Schemes)
+                            {
+                                <option value="@item.auto_id">@item.policy_type</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="" id="divDate" style="">
+                    <div class="col-md-2 mb-3" id="">
+                        <label class="validationCustom02">Member No </label>
+                        <input type="text" id="txtMemberNo" name="MemberNumber" class="form-control myinputs" />
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-2 mb-3">
+                <button type="button" onclick="SearchMember()" class="btn btn-outline-primary" style="margin-top:1.66rem;">Search</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel shadow">
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="table-responsive">
+                            <table id="tblMembers" class="table table-striped table-bordered dt-responsive nowrap table-sm" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">No.</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Relation</th>
+                                        <th scope="col">Gender</th>
+                                        <th scope="col">Age</th>
+                                        <th scope="col">Phone No</th>
+                                        <th scope="col">Job Group</th>
+                                        <th scope="col">BioMetric Status</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">scheme</th>
+                                        <th scope="col">Select Member</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div Id="divGenerateMvc" style="display:none">
+    <div class="x_panel shadow">
+        <div class="x_content">
+            <form class="needs-validation" novalidate id="frmGenerateMvc">
+                <div class="">
+                    <div class="form-group">
+                        <label class="lab">MVC Generation</label>
+                        <input type="hidden" class="form-control myinputs" name="AutoId" id="txtAutoId" />
+                        <input type="hidden" class="form-control myinputs" name="MemberNo" id="txtMemberNo1" />
+                    </div>
+                </div>
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-md-2 mb-2">
+                            <label class="">Name</label>
+                            <input class="form-control m-details" name="MemberName" id="txtMemberName1" />
+                        </div>
+
+                        <div class="col-md-2 mb-2">
+                            <label class="">Scheme</label>
+                            <input class="form-control m-details" name="Scheme" id="txtSchemeName" />
+                        </div>
+
+                        <div class="col-md-2 mb-2">
+                            <label class="">Department</label>
+                            <select class="form-control m-details" id="txtDepartment" name="Department" required>
+                                <option value="Inpatient">Inpatient</option>
+                                <option value="Outpatient">Outpatient</option>
+                                <option selected="selected" value="Optical">Optical</option>
+                                <option value="Maternity">Maternity</option>
+                                <option value="Dental">Dental</option>
+                                <option value="Inpatient follow-up">Inpatient follow-up</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2 mb-2">
+                            <label>Sub Department <span class="text-danger" style="color: #e90c08;">*</span> </label>
+                            <select name="SubDepartment" id="txtSubDepartment" class="form-control m-details">
+                                <option value="Cardiac Surgery ">  Cardiac Surgery </option>
+                                <option value="Cardiology"> Cardiology</option>
+                                <option value="ENT "> ENT </option>
+                                <option value="Gastroenterology "> Gastroenterology </option>
+                                <option value="Internal Medicine"> Internal Medicine</option>
+                                <option value="International Radiology"> International Radiology</option>
+                                <option value="IVF 15. Critical Care."> IVF 15. Critical Care.</option>
+                                <option value="Nephrology "> Nephrology </option>
+                                <option value="Neurology "> Neurology </option>
+                                <option value="Neurosurgery "> Neurosurgery </option>
+                                <option value="Obs &amp; Gynae"> Obs &amp; Gynae</option>
+                                <option value="Orthopedics"> Orthopedics</option>
+                                <option value="Pediatric "> Pediatric </option>
+                                <option value="Dermatology ">Dermatology </option>
+                                <option value="General Surgery">General Surgery</option>
+                                <option value="Imaging">Imaging</option>
+                                <option value="IVF&nbsp;">IVF&nbsp;</option>
+                                <option value="Opthalmology">Opthalmology</option>
+                                <option value="Physician">Physician</option>
+                                <option value="Physiotherapy">Physiotherapy</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2 mb-3">
+                            <button type="button" id="btnGenerateMVC" class="btn btn-outline-primary myinputs" style="margin-top:1.66rem;">Generate MVC</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="divLoader" style="display:none;" class="loader">
+    <img src="~/loaders/loading-23.gif" alt="Loader" style="width:20em;" />
+</div>
+
+
+<script src="~/js/form_validator.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/ClaimsJs/member.js"></script>
+
+<script>
+</script>

@@ -1,0 +1,160 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    //Layout = "~/Areas/Hospital/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/style.css" rel="stylesheet" />
+
+<div class="x_panel " style="height: 5rem; background-color: #136da0;">
+    <div class="col-md-10 my-auto">
+        <h4 class="top-bar-header">
+            Search MVC - Member Verification Code
+        </h4>
+        <p class="text-primary">
+            <span class="barFont">Home</span> <span class="barFont"> <i class="fa fa-angle-double-right"></i> </span>  <span class="barFont">MVC</span>
+        </p>
+    </div>
+</div>
+
+<div class="x_panel shadow">
+    <div id="divErrorGen">
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger" role="alert" id="error">
+                @TempData["Error"].ToString()
+            </div>
+        }
+    </div>
+    <div id="divSuccess">
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success" role="alert" id="error">
+                @TempData["Success"].ToString()
+            </div>
+        }
+    </div>
+    <div class="x_content">
+        <form class="needs-validation" novalidate id="frmSearchMember">
+            <div class="container">
+                <div class="" id="divDate" style="">
+                    <div class="col-md-2 mb-3" id="">
+                        <label class="validationCustom02">MVC No </label>
+                        <input type="text" id="txtMvcNumber" name="MemberNumber" class="form-control myinputs" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <button type="button" onclick="SearchMvc()" class="btn btn-outline-primary" style="margin-top:1.66rem;">Search</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="x_panel shadow">
+    <div id="divErrorGen">
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger" role="alert" id="error">
+                @TempData["Error"].ToString()
+            </div>
+        }
+    </div>
+    <div id="divSuccess">
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success" role="alert" id="error">
+                @TempData["Success"].ToString()
+            </div>
+        }
+    </div>
+    <div class="x_content">
+        <div class="">
+            <table id="tblMvc" class="table table-striped table-bordered  table-sm" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Mvc No</th>
+                        <th scope="col">Member No</th>
+                        <th scope="col">Member Name</th>
+                        <th scope="col">Mvc Date</th>
+                        <th scope="col">Scheme</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">SubDepartment</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="PreAuthModal" tabindex="-1" role="dialog" aria-labelledby="PreAuthModalDetailslLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="txtMemberName"> </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form id="frmSuspensionDetails">
+                    <input type="hidden" class="form-control myinputs" name="Id" id="txtReinstateId">
+                    <div class="">
+                        <div class="form-group">
+                            <label class="lab">MCV No</label>
+                            <label class="form-control myinputs" id="txtMcvNo"></label>
+
+                        </div>
+                    </div>                   
+
+                    <div class="">
+                        <div class="form-group">
+                            <label class="lab">Member No</label>
+                            <label class="form-control myinputs" id="txtMemberNo"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="lab">Action</label>
+                        <select  class="form-control myinputs">
+                            <option value="View PreAuth">View PreAuth</option>
+                            <option value="Referral">Referral</option>
+                        </select>
+                    </div>
+
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" onclick="Reinstate()" class="btn btn-success" data-dismiss="modal">Go</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="divLoader" style="display:none;" class="loader">
+    <img src="~/loaders/loading-23.gif" alt="Loader" style="width:20em;" />
+</div>
+
+<style>
+    .divNext {
+        display: none
+    }
+</style>
+
+<script src="~/js/form_validator.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/ClaimsJs/mvc.js"></script>
+
+<script>
+
+
+
+</script>
